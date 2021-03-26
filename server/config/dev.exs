@@ -25,7 +25,8 @@ config :event_app, EventAppWeb.Endpoint,
 config :cors_plug,
   origin: ["http://localhost:3000"],
   max_age: 86400,
-  methods: ["GET", "POST", "PATCH", "DELETE"]
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  headers: ["x-auth"]
 
 # ## SSL Support
 #

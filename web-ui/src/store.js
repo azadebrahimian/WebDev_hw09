@@ -18,6 +18,15 @@ function events(state = [], action) {
   }
 }
 
+function event(state = {}, action) {
+  switch (action.type) {
+    case 'event/set':
+      return action.data;
+    default:
+      return state;
+  }
+}
+
 function user_form(state = {}, action) {
     switch (action.type) {
     case 'user_form/set':

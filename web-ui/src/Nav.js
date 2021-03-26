@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useState } from 'react';
 import store from './store';
 
 import { api_login } from './api';
@@ -20,7 +21,7 @@ function LoginForm() {
       <Form.Control name="email"
 	            type="text"
 	            onChange={(ev) => setEmail(ev.target.value)}
-	            value={name} />
+	            value={email} />
       <Form.Control name="password"
 	            type="password"
 	            onChange={(ev) => setPass(ev.target.value)}

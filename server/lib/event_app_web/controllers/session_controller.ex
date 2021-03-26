@@ -1,8 +1,8 @@
 defmodule EventAppWeb.SessionController do
   use EventAppWeb, :controller
 
-  def create(conn, %{"name" => name, "password" => password}) do
-    user = EventApp.Users.authenticate(name, password)
+  def create(conn, %{"email" => email, "password" => password}) do
+    user = EventApp.Users.authenticate(email, password);
     
     if user do
       sess = %{
@@ -16,7 +16,7 @@ defmodule EventAppWeb.SessionController do
     else
       conn
       |> put_resp_header("content-type", "application/json; charset=UTF-8")
-      |> send_resp(:unauthorized, Jason.encode!(%{error: "fail"}))
+      |> send_resp(:unauthorized, Jason.encode!(%{error: "Login Failed."}))
     end
   end
 end

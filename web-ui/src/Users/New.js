@@ -44,8 +44,7 @@ function UsersNew() {
   function onSubmit(ev) {
     ev.preventDefault();
     console.log(user);
-
-    let data = pick(user, ['name', 'password']);
+    let data = pick(user, ['name', 'email', 'password']);
     create_user(data).then(() => {
       fetch_users();
       history.push("/users");

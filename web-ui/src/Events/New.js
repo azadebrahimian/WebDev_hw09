@@ -1,17 +1,24 @@
 import React from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { create_event } from '../api';
-import flatpickr from "flatpickr"
+import { useHistory } from 'react-router-dom';
+import { create_event, fetch_events } from '../api';
+import flatpickr from 'flatpickr';
+import pick from 'lodash/pick';
 
 export default function EventsNew() {
+  let history = useHistory();
   let [event, setEvent] = useState({ name: "", description: "", date: "" });
 
   function onSubmit(ev) {
     ev.preventDefault();
-    console.log(ev);
     console.log(event);
-    create_event(event);
+    
+    let data = pick(event, ['name', 'description', 'date']);
+    create_event(data).then(() => {
+      fetch_events();
+      history.push("/events");
+    });
   }
 
   function check_name(name) {
@@ -43,7 +50,7 @@ export default function EventsNew() {
 
   flatpickr('.date', {
     enableTime: true,
-    onChange: function(selected, d, inst) {
+    onChange: function(_selected, d, _inst) {
       let p1 = Object.assign({}, event);
       p1["date"] = d;
       p1.date_msg = check_date(p1.date);
@@ -65,10 +72,10 @@ export default function EventsNew() {
 	    <p>{event.name_msg}</p>
 	  </Form.Group>
           <Form.Group>
-            <Form.Label>Body</Form.Label>
+            <Form.Label>Description</Form.Label>
             <Form.Control as="textarea"
                           rows={4}
-                          onChange={updateBody}
+                          onChange={updateDescription}
                           value={event.description} />
           </Form.Group>
 	  <Form.Group>
@@ -77,7 +84,7 @@ export default function EventsNew() {
 	                  className="date"
 	                  onChange={updateDate}
 	                  value={event.date} />
-	    <p>{event.date_msg}</p>
+	  <p>{event.date_msg}</p>
 	  </Form.Group>
           <Button variant="primary" type="submit">
             Save

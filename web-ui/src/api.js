@@ -13,7 +13,7 @@ export async function api_post(path, data) {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data),
-  },
+  };
   let text = await fetch(
     "http://localhost:4000/api/v1" + path, opts);
   return await text.json();
@@ -53,21 +53,39 @@ export function fetch_events() {
   }));
 }
 
+export function fetch_event(id) {
+  api_get("/events/${id}").then((data) => {
+    console.log(data);
+    let action = {
+      type: 'event/set',
+      data: data,
+    }
+    store.dispatch(action);
+  });
+}
+
 export function create_user(user) {
   return api_post("/users", {user});
 }
 
-export function create_event(event) {
+export async function create_event(event) {
+  let state = store.getState();
+  let token = state.session.token;
+
   let data = new FormData();
-  data.append("event[description]", event.description);
-  fetch("http://localhost:4000/api/v1/events", {
+  data.append("name", event.name);
+  data.append("description", event.description);
+  data.append("date", event.date);
+  let opts = {
     method: 'POST',
-    // Fetch will handle reading the file object and
-    // submitting this as a multipart/form-data request.
     body: data,
-  }).then((resp) => {
-    console.log(resp);
-  });
+    headers: {
+      'x-auth': token,
+    }
+  }
+  console.log("JPIOEGJIEPOJTGPIOEJG");  
+  let text = await fetch("http://localhost:4000/api/v1/events", opts);
+  return await text.json();
 }
 
 export function load_defaults() {
