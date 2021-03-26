@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { userHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import pick from 'lodash/pick';
 
 import { create_user, fetch_users } from '../api';

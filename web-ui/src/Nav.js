@@ -1,7 +1,47 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
+import { Nav, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 import store from './store';
+
+import { api_login } from './api';
+
+function LoginForm() {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
+  function on_submit(ev) {
+    ev.preventDefault();
+    api_login(email, pass);
+  }
+
+  return (
+    <Form onSubmit={on_submit} inline>
+      <Form.Control name="email"
+	            type="text"
+	            onChange={(ev) => setEmail(ev.target.value)}
+	            value={name} />
+      <Form.Control name="password"
+	            type="password"
+	            onChange={(ev) => setPass(ev.target.value)}
+	            value={pass} />
+      <Button variant="primary" type="submit">
+        Login
+      </Button>
+    </Form>
+  );
+}
+
+function LOI({session}) {
+  if (session) {
+    return <SessionInfo session={session} />;
+  } else {
+    return <LoginForm />;
+  }
+}
+
+const LoginOrInfo = connect(
+  ({session}) => ({session}))(LOI);
 
 function Link({to, children}) {
   return (

@@ -6,8 +6,21 @@ export async function api_get(path) {
     return resp.data;
 }
 
-export function api_login(name, password) {
-  api_post("/session", {name, password}).then((data) => {
+export async function api_post(path, data) {
+  let opts = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data),
+  },
+  let text = await fetch(
+    "http://localhost:4000/api/v1" + path, opts);
+  return await text.json();
+}
+
+export function api_login(email, password) {
+  api_post("/session", {email, password}).then((data) => {
     console.log("login resp", data);
     if (data.session) {
       let action = {

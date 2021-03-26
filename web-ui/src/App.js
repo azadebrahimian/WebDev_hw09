@@ -23,6 +23,9 @@ function App() {
 	<Route path="/users/new" exact>
           <UsersNew />
 	</Route>
+	<Route path="/events/new" exact>
+	  <EventsNew />
+	</Route>
       </Switch>
     </Container>
   );

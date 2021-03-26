@@ -14,7 +14,7 @@ defmodule EventAppWeb.EventView do
     %{id: event.id,
       name: event.name,
       date: event.date,
-      description: event.description
+      description: event.description,
       user: render_one(event.user, UserView, "user.json")}
   end
 end

@@ -42,7 +42,7 @@ defmodule EventApp.Users do
   end
 
   def authenticate(name, pass) do
-    user = Repo.get_by(User, name: name)
+    user = Repo.get_by(User, email: email)
     case Argon2.check_pass(user, pass) do
       {:ok, user} -> user
       _ -> nil

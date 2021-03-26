@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "flatpickr": "^4.6.9",
     "lodash": "^4.17.21",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",

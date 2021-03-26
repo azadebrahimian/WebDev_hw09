@@ -1,3 +1,4 @@
+import React from 'react';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { create_event } from '../api';
@@ -48,7 +49,7 @@ export default function EventsNew() {
       p1.date_msg = check_date(p1.date);
       setEvent(p1);
     }
-  }
+  });
 
   // Note: File input can't be a controlled input.
   return (
