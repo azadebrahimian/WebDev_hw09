@@ -19,6 +19,16 @@ defmodule EventAppWeb.Router do
     get "/", PageController, :index
   end
 
+  scope "/api/v1", EventAppWeb do
+    pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
+    resources "/events", EventController, except: [:new, :edit]
+    resources "/comments", CommentController, except: [:new, :edit]
+    resources "/invitees", InviteeController, except: [:new, :edit]
+    resources "/session", SessionController, only: [:create]
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", EventAppWeb do
   #   pipe_through :api

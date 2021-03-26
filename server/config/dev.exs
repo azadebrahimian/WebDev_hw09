@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :event_app, EventApp.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "event_app",
+  password: "aej7Doi9chae",
   database: "event_app_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
@@ -21,6 +21,11 @@ config :event_app, EventAppWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: []
+
+config :cors_plug,
+  origin: ["http://localhost:3000"],
+  max_age: 86400,
+  methods: ["GET", "POST", "PATCH", "DELETE"]
 
 # ## SSL Support
 #
