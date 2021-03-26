@@ -1,0 +1,18 @@
+[Unit]
+Description=HW09 SPA Events App
+
+[Service]
+Type=simple
+User=spa_event_app
+Group=spa_event_app
+Restart=on-failure
+Environment=MIX_ENV=prod
+Environment=PORT=4799
+Environment=PROD=true
+Environment=LANG=en_US.UTF-8
+
+WorkingDirectory=/home/spa_event_app/www/events-spa.wumbo.casa/WebDev_hw09/server
+ExecStart=/bin/bash /home/spa_event_app/www/events-spa.wumbo.casa/WebDev_hw09/server/start.sh
+
+[Install]
+WantedBy=multi-user.target
