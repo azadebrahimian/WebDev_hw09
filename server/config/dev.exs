@@ -23,10 +23,10 @@ config :event_app, EventAppWeb.Endpoint,
   watchers: []
 
 config :cors_plug,
-  origin: ["http://localhost:3000"],
+  origin: ["http://events-spa.wumbo.casa"],
   max_age: 86400,
   methods: ["GET", "POST", "PATCH", "DELETE"],
-  headers: ["x-auth"]
+  headers: ["x-auth", "Content-Type"]
 
 # ## SSL Support
 #

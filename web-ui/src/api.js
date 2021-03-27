@@ -1,7 +1,14 @@
 import store from './store';
 
 export async function api_get(path) {
-    let text = await fetch("http://events-spa-server.wumbo.casa/api/v1" + path, {});
+    let token = store.getState().session.token;
+    let ops = {
+      method: 'GET',
+      headers: {
+        'x-auth': token,
+      }
+    };
+    let text = await fetch("http://events-spa-server.wumbo.casa/api/v1" + path, ops);
 
     let resp = await text.json();
     return resp.data;
@@ -55,14 +62,7 @@ export function fetch_events() {
 }
 
 export function fetch_event(id) {
-  api_get("/events/${id}").then((data) => {
-    console.log(data);
-    let action = {
-      type: 'event/set',
-      data: data,
-    }
-    store.dispatch(action);
-  });
+  api_get("/events/${id}")
 }
 
 export function create_user(user) {
@@ -77,7 +77,7 @@ export async function create_event(event) {
   data.append("name", event.name);
   data.append("description", event.description);
   data.append("date", event.date);
-  let opts = {
+  let ops = {
     method: 'POST',
     body: data,
     headers: {
@@ -85,7 +85,7 @@ export async function create_event(event) {
     }
   }
   
-  let text = await fetch("http://events-spa-server.wumbo.casa/api/v1/events", opts);
+  let text = await fetch("http://events-spa-server.wumbo.casa/api/v1/events", ops);
   return await text.json();
 }
 

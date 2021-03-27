@@ -27,7 +27,7 @@ function App() {
 	<Route path="/events/new" exact>
 	  <EventsNew />
 	</Route>
-	<Route path="/events/:id" component={EventsShow} exact />
+	<Route path="/event/:id" component={EventsShow} exact/>
       </Switch>
     </Container>
   );

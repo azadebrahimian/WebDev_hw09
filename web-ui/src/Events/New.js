@@ -17,7 +17,7 @@ export default function EventsNew() {
     let data = pick(event, ['name', 'description', 'date']);
     create_event(data).then(() => {
       fetch_events();
-      history.push("/events");
+      history.push("/event/${data.data.id}");
     });
   }
 

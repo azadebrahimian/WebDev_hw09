@@ -18,6 +18,12 @@ config :event_app, EventAppWeb.Endpoint,
   pubsub_server: EventApp.PubSub,
   live_view: [signing_salt: "346J0qWs"]
 
+config :cors_plug,
+  origin: ["http://events-spa.wumbo.casa"],
+  max_age: 86400,
+  methods: ["GET", "POST", "PATCH", "DELETE"],
+  headers: ["x-auth", "Content-Type"]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
